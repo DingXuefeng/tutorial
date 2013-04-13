@@ -6,12 +6,15 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <netdb.h> 
+#include <iostream>
 
 void error(const char *msg)
 {
     perror(msg);
     exit(0);
 }
+
+using namespace std;
 
 int main(int argc, char *argv[])
 {
@@ -25,9 +28,12 @@ int main(int argc, char *argv[])
        exit(0);
     }
     portno = atoi(argv[2]);
+    cout<<"portno: "<<portno<<endl;
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
+    cout<<"sockfd: "<<sockfd<<endl;
     if (sockfd < 0) 
         error("ERROR opening socket");
+    cout<<"sockfd: "<<sockfd<<endl;
     server = gethostbyname(argv[1]);
     if (server == NULL) {
         fprintf(stderr,"ERROR, no such host\n");
